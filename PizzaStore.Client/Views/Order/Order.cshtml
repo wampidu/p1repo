@@ -1,0 +1,82 @@
+@model PizzaStore.Client.Models.PizzaViewModel
+@* 
+security measures to be aware of
+CORS - cross-origin resource sharing, ability to share between domains -->similar to whitelisting
+XSS - cross-site scripting , man-in-the-middle-->similar to blacklisting                                                    
+CSRF* - cross-site request forgery, phishing-->similar to blacklisting
+*@
+
+@* HTML WAY *@
+@using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
+{
+//<form action="/order/placeorder" method="post">
+  @Html.AntiForgeryToken();
+  @foreach (var crust in @Model.Crusts)
+  {
+      <input type="radio" name="crust" id="crust" value="@crust.Name" data-val="true" data-val-required="needed"></input>
+      <label for="crust">@crust.Name</label>
+      @Html.ValidationMessageFor(m => m.Crust)
+  }
+
+  <select name="size" id="">
+    @foreach (var size in @Model.Sizes)
+    {
+        <option value="@size.Name">@size.Name</option>
+    }
+  </select>
+  @Html.ValidationMessageFor(m => m.Size)
+
+  @foreach (var topping in @Model.Toppings)
+  {
+      <input type="checkbox" name="selectedtoppings" id="selectedtoppings" value="@topping.Name"></input>
+      <label for="selectedtoppings">@topping.Name</label>
+      @Html.ValidationMessageFor(m => m.SelectedToppings)
+  }
+
+  <button type="submit">place order</button>
+//</form>
+}
+
+ HTML HELPER WAY
+@using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
+{
+  @Html.AntiForgeryToken();
+  foreach (var crust in Model.Crusts)
+  {
+      @Html.RadioButtonFor(m => m.Crust, crust.Name);
+      @Html.LabelFor(m => m.Crust);
+      @Html.ValidationMessageFor(m => m.Crust)
+  }
+  
+  @Html.DropDownListFor(m => m.Sizes, new SelectList(Model.Sizes));
+  @Html.ValidationMessageFor(m => m.Size)
+
+  foreach (var topping in Model.Toppings)
+  {
+      @Html.CheckBoxFor(m => m.SelectedTopping, new { name = "SelectedToppings", value = topping});
+  }
+
+  <button type="submit">place order</button>
+}
+@*
+TAG HELPER WAY 
+<form asp-action="placeorder" method="post">
+  @foreach (var crust in @Model.Crusts)
+  {
+      <input type="radio" asp-for="@Model.Crust" value="@crust.Name">
+  }
+
+  <select asp-for="@Model.Size">
+    @foreach (var size in @Model.Sizes)
+    {
+        <option value="@size.Name">@size.Name</option>
+    }
+  </select>
+</form> 
+*@
+
+<a href="/user/index">user homepage</a>
+
+@Html.ActionLink("user page", "index", "user");
+
+<a asp-controller="user" asp-action="index">user homepage</a>
