@@ -3,3 +3,24 @@
     Layout = "~/Views/User/_LayoutUser.cshtml";
 }
 
+@model PizzaStore.Client.Models.PizzaViewModel
+
+
+<main>
+  <table style="width: 100%">
+    <tr>
+      <th>Crusts</th>
+      <th>Sizes</th>
+      <th>Toppings</th>
+    </tr>
+        <tr>
+          <td>@Model.Crust</td>
+          <td>@Model.Size</td>
+          @foreach (var t in @Model.SelectedToppings)
+          {
+              <td>@Model.SelectedToppings.ToString()</td>
+          }
+          
+        </tr>
+  </table>
+</main>

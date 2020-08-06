@@ -30,12 +30,28 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
   </select>
   @Html.ValidationMessageFor(m => m.Size)
 
-  @foreach (var topping in @Model.Toppings)
+<table class="table">
+        <tr>
+            <th>Toppings</th>
+        </tr>
+        @for (var i = 0; i < @Model.Toppings.Count(); i++)
+        {
+            <tr>
+                <td>
+                    @Html.HiddenFor(it => Model.Toppings[i].Id)
+                    @Html.DisplayFor(it => Model.Toppings[i].Name)
+                    @Html.CheckBoxFor(it => Model.Toppings[i].Checked,new {Style ="vertical-            align:3px"})
+                </td>
+            </tr>
+        }
+    </table>
+
+  @* @foreach (var topping in @Model.Toppings)
   {
       <input type="checkbox" name="selectedtoppings" id="selectedtoppings" value="@topping.Name"></input>
-      <label for="selectedtoppings">@topping.Name</label>
+      //<label for="selectedtoppings">@topping.Name</label>
       @Html.ValidationMessageFor(m => m.SelectedToppings)
-  }
+  } *@
 
   <button type="submit">place order</button>
 //</form>

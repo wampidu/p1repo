@@ -8,7 +8,7 @@ using PizzaStore.Storing;
 
 namespace PizzaStore.Client.Controllers
 {
-  [Route("/order")] //either use CONTROLLER ROUTING or GLOBAL ROUTING {[NOT BOTH]}
+  //[Route("/order")] //either use CONTROLLER ROUTING or GLOBAL ROUTING {[NOT BOTH]}
   //[EnableCors("private")] //CORS is not a P1 req, dont stress on it
     public class OrderController : Controller
     {
@@ -20,12 +20,15 @@ namespace PizzaStore.Client.Controllers
       }
 
       //Route("/home")]
+      [HttpPost]
+      [Route("/order")]
       public IActionResult Home()
       {
         return View("Order", new PizzaViewModel());
       }
 
       [HttpPost]
+      [Route("/order/placeorder")]
       //[ValidateAntiForgeryToken]
       public IActionResult PlaceOrder(PizzaViewModel pizzaViewModel) //model binding
       {
@@ -35,7 +38,8 @@ namespace PizzaStore.Client.Controllers
           // p.Create(pizzaViewModel);
           // repository.Create(pizzaViewModel);
           //return View("User"); //will look for a view labeled "USER" under the ORDER view folder, will then default to the "shared" views folder
-          return Redirect("/user/summary");//http 300-series status //should probably redirect to a user/cart/ or something like that
+          //return View("/user/summary", pizzaViewModel);
+          return RedirectToAction("Summary", "User", pizzaViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
         }
         return View("Order", pizzaViewModel);
       }

@@ -7,5 +7,11 @@ namespace PizzaStore.Domain.Models
     public CrustModel Crust { get; set; }
     public SizeModel Size { get; set; }
     public List<ToppingModel> Toppings { get; set; }
+    public double Price { get; set; }
+    public override string ToString()
+    {
+      string p = $"{Name}, {Crust}, {Size}";
+      return p;
+    }
   }
 }
