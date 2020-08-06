@@ -6,6 +6,7 @@ using PizzaStore.Storing;
 
 namespace PizzaStore.Client.Controllers
 {
+  [Route("/store")]
     public class StoreController : Controller
     {
       // private readonly PizzaStoreDbContext _db;
@@ -15,6 +16,11 @@ namespace PizzaStore.Client.Controllers
       //   _db = dbContext;
       // }
 
+      [Route("/store/home")]
+      public IActionResult Home()
+      {
+        return View("Store");
+      }
       // [HttpGet()]
       // public IEnumerable<StoreModel> Get()
       // {

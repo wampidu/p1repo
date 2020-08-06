@@ -19,23 +19,23 @@ namespace PizzaStore.Client.Controllers
         _db = dbContext;
       }
 
-      //[Route("/home")]
+      //Route("/home")]
       public IActionResult Home()
       {
         return View("Order", new PizzaViewModel());
       }
 
       [HttpPost]
-      [ValidateAntiForgeryToken]
+      //[ValidateAntiForgeryToken]
       public IActionResult PlaceOrder(PizzaViewModel pizzaViewModel) //model binding
       {
-        if (ModelState.IsValid) //what is the validation (add to view model)
+        if (ModelState.IsValid) //validating that the requirements in PizzaViewModel are being met
         {
           //var p = new PizzaFactory(); //use dependency injection
           // p.Create(pizzaViewModel);
           // repository.Create(pizzaViewModel);
           //return View("User"); //will look for a view labeled "USER" under the ORDER view folder, will then default to the "shared" views folder
-          return Redirect("/user/cart");//http 300-series status //should probably redirect to a user/cart/ or something like that
+          return Redirect("/user/summary");//http 300-series status //should probably redirect to a user/cart/ or something like that
         }
         return View("Order", pizzaViewModel);
       }

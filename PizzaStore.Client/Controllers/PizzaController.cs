@@ -15,7 +15,7 @@ namespace PizzaStore.Client.Controllers
         _db = dbContext;
       }
                    //                       listed in order of operation
-      [HttpGet()] //action filters (authorization/authentication filters, action, resource, response, exception)
+      //[HttpGet()] //action filters (authorization/authentication filters, action, resource, response, exception)
       public IActionResult Get()
       {
         //ViewData, TempData (dictionaries)
@@ -24,7 +24,7 @@ namespace PizzaStore.Client.Controllers
         return View("Home2", _db.Pizzas.ToList());
       }
       
-      [HttpGet("{id}")]
+      //[HttpGet("{id}")]
       public PizzaModel Get(int id)
       {
         return _db.Pizzas.SingleOrDefault(p => p.Id == id);

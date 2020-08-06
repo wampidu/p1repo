@@ -6,6 +6,8 @@ namespace PizzaStore.Domain.Models
   {
     public List<PizzaModel> Pizzas { get; set; }
 
+    public double OrderCost { get; set; }
+
     public override string ToString()
     {
       string PizzaList = "";

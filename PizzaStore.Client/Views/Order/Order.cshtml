@@ -1,4 +1,8 @@
 @model PizzaStore.Client.Models.PizzaViewModel
+@{
+    ViewData["Title"] = "Order Page";
+    Layout = "~/Views/Order/_LayoutOrder.cshtml";
+}
 @* 
 security measures to be aware of
 CORS - cross-origin resource sharing, ability to share between domains -->similar to whitelisting
@@ -37,7 +41,7 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
 //</form>
 }
 
- HTML HELPER WAY
+ @* HTML HELPER WAY
 @using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
 {
   @Html.AntiForgeryToken();
@@ -57,7 +61,7 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
   }
 
   <button type="submit">place order</button>
-}
+} *@
 @*
 TAG HELPER WAY 
 <form asp-action="placeorder" method="post">

@@ -1,11 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Data.SqlClient;
 using PizzaStore.Domain.Models;
 using PizzaStore.Storing;
 
 namespace PizzaStore.Client.Controllers
 {
+  //[Route("/user")]
     public class UserController : Controller
     {
       private readonly PizzaStoreDbContext _db;
@@ -14,6 +16,44 @@ namespace PizzaStore.Client.Controllers
       {
         _db = dbContext;
       }
+
+      [Route("/user")]
+      public IActionResult Home()
+      {
+        return View("User");
+      }
+
+      [Route("/user/summary")]
+      public IActionResult Summary()
+      {
+        // return View("Summary");
+        string connectionString = "<THE CONNECTION STRING HERE>";
+        string sql = "SELECT * FROM students";
+        SqlConnection conn = new SqlConnection(connectionString);
+        SqlCommand cmd = new SqlCommand(sql, conn);
+
+        var model = new List<PizzaModel>();
+        using(conn)
+        {
+          conn.Open();
+          SqlDataReader rdr = cmd.ExecuteReader();
+          while(rdr.Read())
+          {
+            var pizza = new PizzaModel();
+            pizza.Size = rdr["Size"];
+            pizza.Crust = rdr["Crust"];
+            foreach (var t in pizza.Toppings)
+            {
+              pizza.Toppings = pizza.Toppings.Add(rdr["Topings"]);
+            }
+            model.Add(pizza);
+          }
+        }
+        return View("Summary", model);
+      }
+
+
+
 
       // [HttpGet()]
       // public IEnumerable<UserModel> Get()
