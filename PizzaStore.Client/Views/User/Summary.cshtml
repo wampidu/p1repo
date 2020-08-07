@@ -16,11 +16,10 @@
         <tr>
           <td>@Model.Crust</td>
           <td>@Model.Size</td>
-          @foreach (var t in @Model.SelectedToppings)
+          @for (var i = 0; i < @Model.SelectedToppings.Count(); i++)
           {
-              <td>@Model.SelectedToppings.ToString()</td>
+              <td>@Model.SelectedToppings[i].Name</td>
           }
-          
         </tr>
   </table>
 </main>

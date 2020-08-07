@@ -38,13 +38,13 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
         {
             <tr>
                 <td>
-                    @Html.HiddenFor(it => Model.Toppings[i].Id)
-                    @Html.DisplayFor(it => Model.Toppings[i].Name)
-                    @Html.CheckBoxFor(it => Model.Toppings[i].Checked,new {Style ="vertical-            align:3px"})
+                  <input type="checkbox" name="selectedtoppings" id="@Model.Toppings[i].Name" value="@Model.Toppings[i].Name">
+                  <label for="@Model.Toppings[i].Name">@Model.Toppings[i].Name</label>
                 </td>
             </tr>
         }
     </table>
+    @Html.ValidationMessageFor(m => m.Toppings)
 
   @* @foreach (var topping in @Model.Toppings)
   {
@@ -52,6 +52,9 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
       //<label for="selectedtoppings">@topping.Name</label>
       @Html.ValidationMessageFor(m => m.SelectedToppings)
   } *@
+  @* @Html.HiddenFor(it => Model.Toppings[i].Id)
+                    @Html.DisplayFor(it => @Model.Toppings[i].Name)
+                    @Html.CheckBoxFor(it => @Model.Toppings[i].IsChecked) *@
 
   <button type="submit">place order</button>
 //</form>

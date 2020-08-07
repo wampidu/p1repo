@@ -8,10 +8,16 @@ namespace PizzaStore.Domain.Factories
     public PizzaModel Create()
     {
       var p = new PizzaModel();
+      return p;
+    }
 
-      p.Crust = new CrustModel();
-      p.Size = new SizeModel();
-      p.Toppings = new List<ToppingModel>{ new ToppingModel() };
+    public PizzaModel CreateSpecific(CrustModel c, SizeModel s, List<ToppingModel> t)
+    {
+      var p = new PizzaModel(c, s, t);
+
+      p.Crust = c;
+      p.Size = s;
+      p.Toppings = t;
 
       return p;
     }

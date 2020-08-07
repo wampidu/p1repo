@@ -11,6 +11,7 @@ namespace PizzaStore.Client.Models
     public List<CrustModel> Crusts { get; set; }
     public List<SizeModel> Sizes { get; set; }
     public List<ToppingModel> Toppings { get; set; }
+    public List<PizzaModel> Pizzas { get; set; }
 // public List<CheckboxTopping> SelectedToppings2 { get; set; }
     // public PizzaViewModel(repository)
     // {
@@ -35,8 +36,8 @@ namespace PizzaStore.Client.Models
 
     public PizzaViewModel()
     {
-      Crusts = new List<CrustModel>(){new CrustModel() {Name = "Chicago"}};
-      Sizes = new List<SizeModel>(){new SizeModel(){Name = "Medium"}};
+      Crusts = new List<CrustModel>(){new CrustModel() {Name = "Chicago"}, new CrustModel(){Name = "Pan"}, new CrustModel(){Name = "Stuffed"} };
+      Sizes = new List<SizeModel>(){new SizeModel(){Name = "Small"}, new SizeModel(){Name = "Medium"}, new SizeModel(){Name = "Large"}};
       Toppings = new List<ToppingModel>()
       {
         new ToppingModel(){Name = "Pepperoni"},
@@ -46,6 +47,10 @@ namespace PizzaStore.Client.Models
         new ToppingModel(){Name = "Onion"},
         new ToppingModel(){Name = "Olives"}
       };
+      SelectedToppings = new List<ToppingModel>();
+
+      //PizzaFactory pizza = new PizzaFactory();
+      //var p = new PizzaModel(Crusts[0], Sizes[0], Toppings);
       //SelectedToppings2 = new List<CheckboxToppings() {};
     }
   }

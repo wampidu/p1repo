@@ -12,6 +12,19 @@ namespace PizzaStore.Domain.Models
     {
       string p = $"{Name}, {Crust}, {Size}";
       return p;
+    
     }
+    public PizzaModel()
+    {
+      
+    }
+
+    public PizzaModel(CrustModel c, SizeModel s, List<ToppingModel> t)
+    {
+      Crust = c;
+      Size = s;
+      Toppings = t;
+    }
+
   }
 }

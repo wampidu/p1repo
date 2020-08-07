@@ -34,6 +34,7 @@ namespace PizzaStore.Client.Controllers
       {
         if (ModelState.IsValid) //validating that the requirements in PizzaViewModel are being met
         {
+          
           //var p = new PizzaFactory(); //use dependency injection
           // p.Create(pizzaViewModel);
           // repository.Create(pizzaViewModel);
