@@ -40,6 +40,22 @@ namespace PizzaStore.Client.Controllers
           // repository.Create(pizzaViewModel);
           //return View("User"); //will look for a view labeled "USER" under the ORDER view folder, will then default to the "shared" views folder
           //return View("/user/summary", pizzaViewModel);
+          // CrustModel tempcrust = new CrustModel();
+          // tempcrust.Name = pizzaViewModel.Crust;
+          // _db.Crusts.Add(tempcrust);
+
+          // SizeModel tempsize = new SizeModel();
+          // tempsize.Name = pizzaViewModel.Size;
+          // _db.Sizes.Add(tempsize);
+
+          // List<ToppingModel> temptoppings = new List<ToppingModel>();
+          // for (var i = 0; i < pizzaViewModel.Toppings.Count(); i ++)
+          // {
+          //     temptoppings.Add(new ToppingModel(){Name=pizzaViewModel.Toppings[i].Name});
+          //     _db.Toppings.Add(temptoppings[i]);
+          // }
+          // _db.SaveChanges();
+
           return RedirectToAction("Summary", "User", pizzaViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
         }
         return View("Order", pizzaViewModel);
