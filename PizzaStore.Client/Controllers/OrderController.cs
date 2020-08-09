@@ -22,8 +22,9 @@ namespace PizzaStore.Client.Controllers
       //Route("/home")]
       [HttpPost]
       [Route("/order/custom")]
-      public IActionResult Custom()
+      public IActionResult Custom(UserViewModel userViewModel)
       {
+        ViewBag.UserName = userViewModel.Name;
         return View("Custom", new PizzaViewModel());
       }
 
@@ -48,9 +49,22 @@ namespace PizzaStore.Client.Controllers
 
       [HttpPost]
       [Route("/order")]
-      public IActionResult Main()
+      public IActionResult Main(UserViewModel userViewModel)
       {
-        return View("MainOrder");
+
+        ViewBag.UserId = userViewModel.ID;
+        ViewBag.UserName = userViewModel.Name;
+        var users = _db.Users.ToList();
+        for(int i = 0; i < users.Count(); i++)
+        {
+          if(userViewModel.Name == users[i].Name)
+          {
+            return View("MainOrder", userViewModel);
+          }
+        }
+        _db.Users.Add(new UserModel(){Name = userViewModel.Name, Id = userViewModel.ID});
+        _db.SaveChanges();
+        return View("MainOrder", userViewModel);
       }
       /*
       http status

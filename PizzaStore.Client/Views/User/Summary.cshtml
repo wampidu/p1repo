@@ -12,6 +12,7 @@
       <th>Crusts</th>
       <th>Sizes</th>
       <th>Toppings</th>
+      <th>User</th>
     </tr>
         <tr>
           <td>@Model.Crust</td>
@@ -20,6 +21,7 @@
           {
               <td>@Model.SelectedToppings[i].Name</td>
           }
+          <td>@ViewBag.UserName</td>
         </tr>
   </table>
 </main>
