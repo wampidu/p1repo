@@ -1,0 +1,15 @@
+@model PizzaStore.Client.Models.PizzaViewModel
+@{
+    ViewData["Title"] = "Main Order Page";
+    Layout = "~/Views/Order/_LayoutOrder.cshtml";
+}
+
+@using(Html.BeginForm("Custom", "Order", null, FormMethod.Post))
+{
+  <button type="submit">Custom Pizza</button>
+}
+
+@using(Html.BeginForm("Preset", "Order", null, FormMethod.Post))
+{
+  <button type="submit">Preset Pizzas</button>
+}

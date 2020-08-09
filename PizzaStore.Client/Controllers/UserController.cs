@@ -17,11 +17,12 @@ namespace PizzaStore.Client.Controllers
       {
         _db = dbContext;
       }
-
+      
+      [HttpPost]
       [Route("/user")]
-      public IActionResult Home()
+      public IActionResult Home(UserViewModel user)
       {
-        return View("User");
+        return View("User", user);
       }
 
       [Route("/user/summary")]

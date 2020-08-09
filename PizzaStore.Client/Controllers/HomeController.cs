@@ -20,9 +20,9 @@ namespace PizzaStore.Client.Controllers
         }
 
         [Route("/")]
-        public IActionResult Index()
+        public IActionResult Index(UserViewModel user)
         {
-            return View();
+            return View(user);
         }
 
         public IActionResult Privacy()

@@ -12,11 +12,7 @@ namespace PizzaStore.Client.Models
     public List<SizeModel> Sizes { get; set; }
     public List<ToppingModel> Toppings { get; set; }
     public List<PizzaModel> Pizzas { get; set; }
-// public List<CheckboxTopping> SelectedToppings2 { get; set; }
-    // public PizzaViewModel(repository)
-    // {
-    //   Crusts = new List<CrustModel>() {new CrustModel};
-    // }
+
     
     //in from the client
     [Required(ErrorMessage = "You must select a crust")]
@@ -30,8 +26,8 @@ namespace PizzaStore.Client.Models
     // [MaxLength(5)]
     public List<ToppingModel> SelectedToppings { get; set; }
     //public int NumberOfToppings { get; set; }
+    public List<string> SelectedToppings2 { get; set; }
     public bool SelectedTopping { get; set; }
-    // public List<string> SelectedToppings2 { get; set; }
     
 
     public PizzaViewModel()
@@ -48,18 +44,14 @@ namespace PizzaStore.Client.Models
         new ToppingModel(){Name = "Olives"}
       };
       SelectedToppings = new List<ToppingModel>();
+      SelectedToppings2 = new List<string>();
 
-      //PizzaFactory pizza = new PizzaFactory();
-      //var p = new PizzaModel(Crusts[0], Sizes[0], Toppings);
-      //SelectedToppings2 = new List<CheckboxToppings() {};
+      
     }
   }
   
-  public class CheckBoxTopping
-  {
-    public string Text { get; set; }
-
-    public bool IsSelected { get; set; }
-    
-  }
+  // public class CheckBoxToppingModel : AModel
+  // {
+  //   public bool IsSelected { get; set; }
+  // }
 }

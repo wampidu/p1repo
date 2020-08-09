@@ -21,10 +21,17 @@ namespace PizzaStore.Client.Controllers
 
       //Route("/home")]
       [HttpPost]
-      [Route("/order")]
-      public IActionResult Home()
+      [Route("/order/custom")]
+      public IActionResult Custom()
       {
-        return View("Order", new PizzaViewModel());
+        return View("Custom", new PizzaViewModel());
+      }
+
+      [HttpPost]
+      [Route("/order/preset")]
+      public IActionResult Preset()
+      {
+        return View("Preset", new PizzaViewModel());
       }
 
       [HttpPost]
@@ -34,31 +41,16 @@ namespace PizzaStore.Client.Controllers
       {
         if (ModelState.IsValid) //validating that the requirements in PizzaViewModel are being met
         {
-          
-          //var p = new PizzaFactory(); //use dependency injection
-          // p.Create(pizzaViewModel);
-          // repository.Create(pizzaViewModel);
-          //return View("User"); //will look for a view labeled "USER" under the ORDER view folder, will then default to the "shared" views folder
-          //return View("/user/summary", pizzaViewModel);
-          // CrustModel tempcrust = new CrustModel();
-          // tempcrust.Name = pizzaViewModel.Crust;
-          // _db.Crusts.Add(tempcrust);
-
-          // SizeModel tempsize = new SizeModel();
-          // tempsize.Name = pizzaViewModel.Size;
-          // _db.Sizes.Add(tempsize);
-
-          // List<ToppingModel> temptoppings = new List<ToppingModel>();
-          // for (var i = 0; i < pizzaViewModel.Toppings.Count(); i ++)
-          // {
-          //     temptoppings.Add(new ToppingModel(){Name=pizzaViewModel.Toppings[i].Name});
-          //     _db.Toppings.Add(temptoppings[i]);
-          // }
-          // _db.SaveChanges();
-
           return RedirectToAction("Summary", "User", pizzaViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
         }
-        return View("Order", pizzaViewModel);
+        return View("MainOrder", pizzaViewModel);
+      }
+
+      [HttpPost]
+      [Route("/order")]
+      public IActionResult Main()
+      {
+        return View("MainOrder");
       }
       /*
       http status
@@ -67,6 +59,22 @@ namespace PizzaStore.Client.Controllers
        - 300-series = redirection, temporary or permanent
        - 400-series = user is stupid // errors on user end
        - 500-series = dev is stupid // errors on dev end
+
+        //  CrustModel tempcrust = new CrustModel();
+          //  tempcrust.Name = pizzaViewModel.Crust;
+          //  _db.Crusts.Add(tempcrust);
+
+          //  SizeModel tempsize = new SizeModel();
+          //  tempsize.Name = pizzaViewModel.Size;
+          //  _db.Sizes.Add(tempsize);
+
+          // List<ToppingModel> temptoppings = new List<ToppingModel>();
+          // for (var i = 0; i < pizzaViewModel.Toppings.Count(); i ++)
+          // {
+          //     temptoppings.Add(new ToppingModel(){Name=pizzaViewModel.Toppings[i].Name});
+          //     _db.Toppings.Add(temptoppings[i]);
+          // }
+          //  _db.SaveChanges();
       */
     }
 }

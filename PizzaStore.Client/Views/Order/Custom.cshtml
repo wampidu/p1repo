@@ -1,6 +1,6 @@
 @model PizzaStore.Client.Models.PizzaViewModel
 @{
-    ViewData["Title"] = "Order Page";
+    ViewData["Title"] = "Custom Order Page";
     Layout = "~/Views/Order/_LayoutOrder.cshtml";
 }
 @* 
@@ -17,8 +17,8 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
   @Html.AntiForgeryToken();
   @foreach (var crust in @Model.Crusts)
   {
-      <input type="radio" name="crust" id="crust" value="@crust.Name" data-val="true" data-val-required="needed"></input>
-      <label for="crust">@crust.Name</label>
+      <input type="radio" name="crust" id="@crust.Name" value="@crust.Name" data-val="true" data-val-required="needed"></input>
+      <label for="@crust.Name">@crust.Name</label>
       @Html.ValidationMessageFor(m => m.Crust)
   }
 
@@ -34,29 +34,34 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
         <tr>
             <th>Toppings</th>
         </tr>
-        @for (var i = 0; i < @Model.Toppings.Count(); i++)
-        {
-            <tr>
-                <td>
-                  <input type="checkbox" name="selectedtoppings" id="@Model.Toppings[i].Name" value="@Model.Toppings[i].Name">
-                  <label for="@Model.Toppings[i].Name">@Model.Toppings[i].Name</label>
-                </td>
-            </tr>
-        }
-    </table>
-    @Html.ValidationMessageFor(m => m.Toppings)
+          <tr>
+            <td>
+                @for (var i = 0; i < @Model.Toppings.Count(); i ++)
+                  {
+                      @* <option value="@Model.Toppings[i]">@Model.Toppings[i].Name</option>
+                      @Html.HiddenFor(it => Model.Toppings[i].Name) *@
+                      @Html.DisplayFor(it => @Model.Toppings[i].Name)
+                      @Html.CheckBoxFor(it => @Model.Toppings[i].IsChecked) 
+                      @Html.HiddenFor(it => @Model.Toppings[i].Name)
+                  }
+              @* <option value="null">None</option> *@
+              @Html.ValidationMessageFor(m => m.Toppings)
+            </td>
+          </tr>
+</table>
+     <button type="submit">place order</button>
 
-  @* @foreach (var topping in @Model.Toppings)
-  {
-      <input type="checkbox" name="selectedtoppings" id="selectedtoppings" value="@topping.Name"></input>
+ //  @* @foreach (var topping in @Model.Toppings)
+//  {
+//      <input type="checkbox" name="selectedtoppings" id="selectedtoppings" value="@topping.Name"></input>
       //<label for="selectedtoppings">@topping.Name</label>
-      @Html.ValidationMessageFor(m => m.SelectedToppings)
-  } *@
-  @* @Html.HiddenFor(it => Model.Toppings[i].Id)
-                    @Html.DisplayFor(it => @Model.Toppings[i].Name)
-                    @Html.CheckBoxFor(it => @Model.Toppings[i].IsChecked) *@
+ //     @Html.ValidationMessageFor(m => m.SelectedToppings)
+//  } 
+  // @Html.HiddenFor(it => Model.Toppings[i].Id)
+   //                 @Html.DisplayFor(it => @Model.Toppings[i].Name)
+//                    @Html.CheckBoxFor(it => @Model.Toppings[i].IsChecked)  *@
 
-  <button type="submit">place order</button>
+ 
 //</form>
 }
 
@@ -81,6 +86,7 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
 
   <button type="submit">place order</button>
 } *@
+
 @*
 TAG HELPER WAY 
 <form asp-action="placeorder" method="post">
@@ -98,8 +104,12 @@ TAG HELPER WAY
 </form> 
 *@
 
-<a href="/user/index">user homepage</a>
+@* <a href="/order">main order page</a>
+<a asp-controller="order" asp-action="main">user homepage</a> *@
 
-@Html.ActionLink("user page", "index", "user");
-
-<a asp-controller="user" asp-action="index">user homepage</a>
+ @* @for (var i = 0; i < @Model.Toppings.Count(); i++)
+        {
+            <tr>
+                <td>
+                  @* <input type="checkbox" name="checkboxtoppingmodel" id="@Model.Toppings[i].Name" value="@Model.Toppings[i].Name">
+                  <label for="@Model.Toppings[i].Name">@Model.Toppings[i].Name</label> *@

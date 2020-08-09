@@ -2,8 +2,14 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Home/_LayoutHome.cshtml";
 }
+@model PizzaStore.Client.Models.UserViewModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+@using(Html.BeginForm("Home", "User", null, FormMethod.Post))
+{
+  <button type="submit">User Login</button>
+}
+
+@using(Html.BeginForm("Store", "Store", null, FormMethod.Post))
+{
+  <button type="submit">Store Login</button>
+}
