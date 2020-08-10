@@ -25,26 +25,31 @@ namespace PizzaStore.Client.Controllers
       public IActionResult Custom(UserViewModel userViewModel)
       {
         ViewBag.UserName = userViewModel.Name;
-        return View("Custom", new PizzaViewModel());
+        return View("Custom", new PizzaViewModel(_db));
       }
 
       [HttpPost]
       [Route("/order/preset")]
-      public IActionResult Preset()
+      public IActionResult Preset(UserViewModel userViewModel)
       {
-        return View("Preset", new PizzaViewModel());
+        ViewBag.Sizes = _db.Sizes.ToList();
+        ViewBag.Crusts = _db.Crusts.ToList();
+        ViewBag.Toppings = _db.Toppings.ToList();
+        ViewBag.Order = new OrderModel();
+        ViewBag.Pizza = new PizzaModel();
+        return View("Preset", new OrderViewModel());
       }
 
       [HttpPost]
       [Route("/order/placeorder")]
       //[ValidateAntiForgeryToken]
-      public IActionResult PlaceOrder(PizzaViewModel pizzaViewModel) //model binding
+      public IActionResult PlaceOrder(OrderViewModel orderViewModel) //model binding
       {
         if (ModelState.IsValid) //validating that the requirements in PizzaViewModel are being met
         {
-          return RedirectToAction("Summary", "User", pizzaViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
+          return RedirectToAction("Summary", "User", orderViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
         }
-        return View("MainOrder", pizzaViewModel);
+        return View("MainOrder");
       }
 
       [HttpPost]
@@ -59,7 +64,7 @@ namespace PizzaStore.Client.Controllers
         {
           if(userViewModel.Name == users[i].Name)
           {
-            return View("MainOrder", userViewModel);
+            return View("MainOrder", new UserViewModel(){Name = userViewModel.Name});
           }
         }
         _db.Users.Add(new UserModel(){Name = userViewModel.Name, Id = userViewModel.ID});

@@ -41,9 +41,9 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
                   {
                       @* <option value="@Model.Toppings[i]">@Model.Toppings[i].Name</option>
                       @Html.HiddenFor(it => Model.Toppings[i].Name) *@
-                      @Html.DisplayFor(it => @Model.Toppings[i].Name)
-                      @Html.CheckBoxFor(it => @Model.Toppings[i].IsChecked) 
-                      @Html.HiddenFor(it => @Model.Toppings[i].Name)
+                      @Html.DisplayFor(m => @Model.Toppings[i].Name)
+                      @Html.CheckBoxFor(m => @Model.Toppings[i].IsChecked, new {name = "selectedtoppings2", value = @Model.Toppings[i].Name}) 
+                      @Html.HiddenFor(m => @Model.SelectedToppings2)
                   }
               @* <option value="null">None</option> *@
               @Html.ValidationMessageFor(m => m.Toppings)

@@ -2,12 +2,14 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using PizzaStore.Domain.Factories;
 using PizzaStore.Domain.Models;
+using PizzaStore.Storing;
 
 namespace PizzaStore.Client.Models
 {
   public class PizzaViewModel
   {
     //out to the client
+    private readonly PizzaStoreDbContext _db;
     public List<CrustModel> Crusts { get; set; }
     public List<SizeModel> Sizes { get; set; }
     public List<ToppingModel> Toppings { get; set; }
@@ -30,8 +32,9 @@ namespace PizzaStore.Client.Models
     public bool SelectedTopping { get; set; }
     
 
-    public PizzaViewModel()
+    public PizzaViewModel(PizzaStoreDbContext db)
     {
+      
       Crusts = new List<CrustModel>(){new CrustModel() {Name = "Chicago"}, new CrustModel(){Name = "Pan"}, new CrustModel(){Name = "Stuffed"} };
       Sizes = new List<SizeModel>(){new SizeModel(){Name = "Small"}, new SizeModel(){Name = "Medium"}, new SizeModel(){Name = "Large"}};
       Toppings = new List<ToppingModel>()

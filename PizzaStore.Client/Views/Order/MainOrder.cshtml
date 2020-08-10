@@ -7,13 +7,16 @@
 @using(Html.BeginForm("Custom", "Order", null, FormMethod.Post))
 {
   
-  <button type="submit">Custom Pizza</button>
   @Model.Name
+  <input type="submit" value="@Model.Name">
+  @Html.HiddenFor(m => m.Name)
+  @ViewBag.UserName
   
 
 }
 
 @using(Html.BeginForm("Preset", "Order", null, FormMethod.Post))
 {
-  <button type="submit">Preset Pizzas</button>
+  <input type="submit" value="Preset">
+  @Html.HiddenFor(m => m.Name)
 }
