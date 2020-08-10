@@ -38,7 +38,8 @@ namespace PizzaStore.Client.Controllers
         ViewBag.Order = new OrderModel();
         ViewBag.Pizza = new PizzaModel();
         ViewBag.UserName = userViewModel.Name;
-        return View("Preset", new PizzaViewModel(){Size = "Medium", Crust = "Pan", UserName = userViewModel.Name});
+        ViewBag.UserID = userViewModel.ID;
+        return View("Preset", new PizzaViewModel(){Size = "Medium", Crust = "Pan", UserName = userViewModel.Name, UserID = userViewModel.ID});
       }
 
       [HttpPost]
@@ -61,7 +62,19 @@ namespace PizzaStore.Client.Controllers
       {
         //if (ModelState.IsValid) //validating that the requirements in PizzaViewModel are being met
         //{
+          CrustModel crust = new CrustModel(){Name = pizzaViewModel.Crust};
+          SizeModel size = new SizeModel(){Name = pizzaViewModel.Size};
+          ToppingModel topping = new ToppingModel(){Name = pizzaViewModel.SelectedTopping};
+          List<ToppingModel> ToppingList = new List<ToppingModel>(){topping};
+          PizzaModel pizza = new PizzaModel(){Crust = crust, Size = size, Toppings = ToppingList};
+          _db.Pizzas.Add(pizza);
+          OrderModel order = new OrderModel();
+          order.UserID = pizzaViewModel.UserID;
           
+
+          //order.Pizzas.Add(new PizzaModel(){})
+          _db.Orders.Add(order);
+          _db.SaveChanges();
           return RedirectToAction("Summary", "User", pizzaViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
         //}
         //return View("MainOrder");
@@ -79,6 +92,7 @@ namespace PizzaStore.Client.Controllers
         {
           if(userViewModel.Name == users[i].Name)
           {
+            userViewModel.ID = users[i].Id;
             return View("MainOrder", userViewModel);
           }
         }

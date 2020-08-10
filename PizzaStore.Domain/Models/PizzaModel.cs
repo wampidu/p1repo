@@ -8,6 +8,7 @@ namespace PizzaStore.Domain.Models
     public SizeModel Size { get; set; }
     public List<ToppingModel> Toppings { get; set; }
     public double Price { get; set; }
+    
     public override string ToString()
     {
       string p = $"{Name}, {Crust}, {Size}";
@@ -16,15 +17,12 @@ namespace PizzaStore.Domain.Models
     }
     public PizzaModel()
     {
-      
+      Crust = new CrustModel();
+      Size = new SizeModel();
+      Toppings = new List<ToppingModel>();
     }
 
-    public PizzaModel(CrustModel c, SizeModel s, List<ToppingModel> t)
-    {
-      Crust = c;
-      Size = s;
-      Toppings = t;
-    }
+    
 
   }
 }

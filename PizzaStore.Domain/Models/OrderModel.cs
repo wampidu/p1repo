@@ -21,5 +21,10 @@ namespace PizzaStore.Domain.Models
       }
       return PizzaList;
     }
+
+    public OrderModel()
+    {
+      Pizzas = new List<PizzaModel>();
+    }
   }
 }

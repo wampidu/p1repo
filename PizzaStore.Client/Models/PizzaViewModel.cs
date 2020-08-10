@@ -15,6 +15,7 @@ namespace PizzaStore.Client.Models
     public List<PizzaModel> Pizzas { get; set; }
 
     public string UserName { get; set; }
+    public int UserID { get; set; }
 
     
     //in from the client

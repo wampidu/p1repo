@@ -8,10 +8,12 @@
 {
   <input type="submit" value="Custom">
   @Html.HiddenFor(m => m.Name)
+  @Html.HiddenFor(m => m.ID)
 }
 
 @using(Html.BeginForm("Preset", "Order", null, FormMethod.Post))
 {
   <input type="submit" value="Preset">
   @Html.HiddenFor(m => m.Name)
+  @Html.HiddenFor(m => m.ID)
 }

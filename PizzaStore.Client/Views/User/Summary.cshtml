@@ -25,5 +25,10 @@
   </main>
 
   <button type="submit">Confirm Order</button>
-  
+  @Html.HiddenFor(m => m.Crust)
+  @Html.HiddenFor(m => m.Size)
+  @Html.HiddenFor(m => m.UserName)
+  @Html.HiddenFor(m => m.SelectedTopping)
+  @Html.HiddenFor(m => m.UserID)
+
 }
