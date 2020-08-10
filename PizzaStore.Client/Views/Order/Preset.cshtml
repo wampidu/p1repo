@@ -1,4 +1,4 @@
-@model PizzaStore.Client.Models.OrderViewModel
+@model PizzaStore.Client.Models.PizzaViewModel
 @{
     ViewData["Title"] = "Preset Order Page";
     Layout = "~/Views/Order/_LayoutOrder.cshtml";
@@ -7,50 +7,18 @@
 @using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
 {
   @Html.AntiForgeryToken();
-  <tr>
-    <th>Toppings</th>
-    @foreach (var topping in ViewBag.Toppings)
-    {
-        <p>@topping.Name</p>
-    }
-    <th>Size</th>
-    @foreach (var size in ViewBag.Sizes)
-    {
-      <p>@size.Name</p>
-    }
-    <th>Crust</th>
-    @foreach (var crust in ViewBag.Crusts)
-    {
-        <p>@crust.Name</p>
-    }
-  </tr>
-  <tr>
-    <td>
-    </td>
-  </tr>
-  @* Model.Crust = "Pan";
-  Model.Size = "Medium";
-  Model.SelectedToppings2.Add("Pepperoni"); *@
-  
-  <button type="submit">Custom Pizza</button>
-}
 
-@using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
-{
-  @Html.AntiForgeryToken();
+  <select name="selectedtopping" id="">
+    @foreach (var topping in @Model.Toppings)
+    {
+        <option value="@topping.Name">@topping.Name</option>
+    }
+  </select>
+  @Html.HiddenFor(m => m.SelectedTopping)
   
-  @* Model.Crust = "Chicago";
-  Model.Size = "Medium";
-  Model.SelectedToppings2.Add("Ham"); *@
-  <button type="submit">Custom Pizza</button>
-}
-
-@using(Html.BeginForm("PlaceOrder", "Order", null, FormMethod.Post))
-{
-  @Html.AntiForgeryToken();
+  <button type="submit">Submit</button>
+  @Html.HiddenFor(m => m.Crust)
+  @Html.HiddenFor(m => m.Size)
+  @Html.HiddenFor(m => m.UserName)
   
-  @* Model.Crust = "Stuffed";
-  Model.Size = "Medium";
-  Model.SelectedToppings2.Add("Pineapple"); *@
-  <button type="submit">Custom Pizza</button>
 }

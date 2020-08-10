@@ -25,7 +25,7 @@ namespace PizzaStore.Client.Controllers
       public IActionResult Custom(UserViewModel userViewModel)
       {
         ViewBag.UserName = userViewModel.Name;
-        return View("Custom", new PizzaViewModel(_db));
+        return View("Custom", new PizzaViewModel());
       }
 
       [HttpPost]
@@ -37,19 +37,34 @@ namespace PizzaStore.Client.Controllers
         ViewBag.Toppings = _db.Toppings.ToList();
         ViewBag.Order = new OrderModel();
         ViewBag.Pizza = new PizzaModel();
-        return View("Preset", new OrderViewModel());
+        ViewBag.UserName = userViewModel.Name;
+        return View("Preset", new PizzaViewModel(){Size = "Medium", Crust = "Pan", UserName = userViewModel.Name});
       }
 
       [HttpPost]
       [Route("/order/placeorder")]
       //[ValidateAntiForgeryToken]
-      public IActionResult PlaceOrder(OrderViewModel orderViewModel) //model binding
+      public IActionResult PlaceOrder(PizzaViewModel pizzaViewModel) //model binding
       {
-        if (ModelState.IsValid) //validating that the requirements in PizzaViewModel are being met
-        {
-          return RedirectToAction("Summary", "User", orderViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
-        }
-        return View("MainOrder");
+        //if (ModelState.IsValid) //validating that the requirements in PizzaViewModel are being met
+        //{
+          
+          return RedirectToAction("Summary", "User", pizzaViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
+        //}
+        //return View("MainOrder");
+      }
+
+      [HttpPost]
+      [Route("/order/confirmorder")]
+      //[ValidateAntiForgeryToken]
+      public IActionResult ConfirmOrder(PizzaViewModel pizzaViewModel) //model binding
+      {
+        //if (ModelState.IsValid) //validating that the requirements in PizzaViewModel are being met
+        //{
+          
+          return RedirectToAction("Summary", "User", pizzaViewModel);//http 300-series status //should probably redirect to a user/cart/ or something like that
+        //}
+        //return View("MainOrder");
       }
 
       [HttpPost]
@@ -64,13 +79,15 @@ namespace PizzaStore.Client.Controllers
         {
           if(userViewModel.Name == users[i].Name)
           {
-            return View("MainOrder", new UserViewModel(){Name = userViewModel.Name});
+            return View("MainOrder", userViewModel);
           }
         }
         _db.Users.Add(new UserModel(){Name = userViewModel.Name, Id = userViewModel.ID});
         _db.SaveChanges();
         return View("MainOrder", userViewModel);
       }
+
+      
       /*
       http status
        - 100-series = network

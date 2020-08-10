@@ -6,13 +6,8 @@
 
 @using(Html.BeginForm("Custom", "Order", null, FormMethod.Post))
 {
-  
-  @Model.Name
-  <input type="submit" value="@Model.Name">
+  <input type="submit" value="Custom">
   @Html.HiddenFor(m => m.Name)
-  @ViewBag.UserName
-  
-
 }
 
 @using(Html.BeginForm("Preset", "Order", null, FormMethod.Post))

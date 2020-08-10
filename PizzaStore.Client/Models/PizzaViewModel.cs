@@ -9,11 +9,12 @@ namespace PizzaStore.Client.Models
   public class PizzaViewModel
   {
     //out to the client
-    private readonly PizzaStoreDbContext _db;
     public List<CrustModel> Crusts { get; set; }
     public List<SizeModel> Sizes { get; set; }
     public List<ToppingModel> Toppings { get; set; }
     public List<PizzaModel> Pizzas { get; set; }
+
+    public string UserName { get; set; }
 
     
     //in from the client
@@ -28,11 +29,11 @@ namespace PizzaStore.Client.Models
     // [MaxLength(5)]
     public List<ToppingModel> SelectedToppings { get; set; }
     //public int NumberOfToppings { get; set; }
-    public List<string> SelectedToppings2 { get; set; }
-    public bool SelectedTopping { get; set; }
+    public List<ToppingModel> SelectedToppings2 { get; set; }
+    public string SelectedTopping { get; set; }
     
 
-    public PizzaViewModel(PizzaStoreDbContext db)
+    public PizzaViewModel()
     {
       
       Crusts = new List<CrustModel>(){new CrustModel() {Name = "Chicago"}, new CrustModel(){Name = "Pan"}, new CrustModel(){Name = "Stuffed"} };
@@ -47,7 +48,8 @@ namespace PizzaStore.Client.Models
         new ToppingModel(){Name = "Olives"}
       };
       SelectedToppings = new List<ToppingModel>();
-      SelectedToppings2 = new List<string>();
+      SelectedToppings2 = new List<ToppingModel>();
+      SelectedTopping = new string("");
 
       
     }
