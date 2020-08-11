@@ -22,6 +22,7 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
       <label for="@crust.Name">@crust.Name</label>
       @Html.ValidationMessageFor(m => m.Crust)
   }
+  @Html.HiddenFor(m => m.Crust)
 
   <select name="size" id="">
     @foreach (var size in @Model.Sizes)
@@ -29,6 +30,7 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
         <option value="@size.Name">@size.Name</option>
     }
   </select>
+  @Html.HiddenFor(m => m.Size)
   @Html.ValidationMessageFor(m => m.Size)
 
 <table class="table">
@@ -42,8 +44,8 @@ CSRF* - cross-site request forgery, phishing-->similar to blacklisting
                       @* <option value="@Model.Toppings[i]">@Model.Toppings[i].Name</option>
                       @Html.HiddenFor(it => Model.Toppings[i].Name) *@
                       @Html.DisplayFor(m => @Model.Toppings[i].Name)
-                      @Html.CheckBoxFor(m => @Model.Toppings[i].IsChecked, new {name = "selectedtoppings2", value = @Model.Toppings[i].Name}) 
-                      @Html.HiddenFor(m => @Model.SelectedToppings2)
+                      @Html.CheckBoxFor(m => @Model.Toppings[i].IsChecked, new {name = "selectedtoppingstring", value = @Model.Toppings[i].Name}) 
+                      @Html.HiddenFor(m => @Model.SelectedToppingString)
                   }
               @* <option value="null">None</option> *@
               @Html.ValidationMessageFor(m => m.Toppings)

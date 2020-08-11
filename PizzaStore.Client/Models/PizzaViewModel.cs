@@ -31,12 +31,15 @@ namespace PizzaStore.Client.Models
     public List<ToppingModel> SelectedToppings { get; set; }
     //public int NumberOfToppings { get; set; }
     public List<ToppingModel> SelectedToppings2 { get; set; }
+    public List<string> SelectedToppingString { get; set; }
     public string SelectedTopping { get; set; }
     
 
     public PizzaViewModel()
     {
-      
+      //use db to load in values initially
+      //ex: _db = dbContext;
+      //    Crusts = _db.Crusts.ToList();
       Crusts = new List<CrustModel>(){new CrustModel() {Name = "Chicago"}, new CrustModel(){Name = "Pan"}, new CrustModel(){Name = "Stuffed"} };
       Sizes = new List<SizeModel>(){new SizeModel(){Name = "Small"}, new SizeModel(){Name = "Medium"}, new SizeModel(){Name = "Large"}};
       Toppings = new List<ToppingModel>()
@@ -50,7 +53,7 @@ namespace PizzaStore.Client.Models
       };
       SelectedToppings = new List<ToppingModel>();
       SelectedToppings2 = new List<ToppingModel>();
-      SelectedTopping = new string("");
+      SelectedToppingString = new List<string>();
 
       
     }
