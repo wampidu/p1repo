@@ -5,6 +5,6 @@ RUN dotnet publish -c Release -o out PizzaStore.Client/PizzaStore.Client.csproj
 
 FROM mcr.microsoft.com/dotnet/core/aspnet
 WORKDIR /dist
-COPY --from=build /app/out /dist
+COPY --from=publish /app/out /dist
 
 CMD ["dotnet", "PizzaStore.Client.dll"]
